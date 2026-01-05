@@ -1,0 +1,405 @@
+/* ============================================
+   CSS RESET & BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+:root {
+    /* Colors */
+    --color-bg: #f5f5f5;
+    --color-surface: #ffffff;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666666;
+    --color-text-disabled: #b0b0b0;
+    --color-border: #2a2a2a;
+    --color-border-focus: #4a4a4a;
+    --color-error: #dc2626;
+    --color-error-bg: #fef2f2;
+    --color-button-primary: #000000;
+    --color-button-hover: #2a2a2a;
+    --color-progress-bg: #e5e5e5;
+    --color-progress-fill: #2a2a2a;
+    --color-checklist-bg: #e8e8e8;
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-size-base: 16px;
+    --font-size-label: 18px;
+    --font-size-small: 14px;
+    --font-size-heading: 22px;
+    --font-size-progress: 32px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+/* Visually hidden utility for screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form-wrapper {
+    background-color: var(--color-surface);
+    border: 3px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-label {
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+}
+
+/* Input wrapper for password fields with toggle button */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color var(--transition-base);
+}
+
+.input-wrapper .form-input {
+    padding-right: var(--spacing-2xl);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-disabled);
+}
+
+.form-input:focus {
+    border-color: var(--color-border-focus);
+}
+
+.form-input.error {
+    border-color: var(--color-error);
+    color: var(--color-error);
+}
+
+/* Error message */
+.error-message {
+    font-size: var(--font-size-small);
+    color: var(--color-error);
+    min-height: 20px;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+/* Password toggle button */
+.toggle-password {
+    position: absolute;
+    right: var(--spacing-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+}
+
+.toggle-password:hover {
+    color: var(--color-text-secondary);
+}
+
+.toggle-password:focus {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.eye-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Submit button */
+.submit-button {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-surface);
+    background-color: var(--color-button-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+}
+
+.submit-button:hover {
+    background-color: var(--color-button-hover);
+}
+
+.submit-button:focus {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+.submit-button:active {
+    transform: translateY(1px);
+}
+
+/* ============================================
+   PROGRESS CIRCLE
+   ============================================ */
+.progress-circle {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--color-progress-bg);
+    stroke-width: 12;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: var(--color-progress-fill);
+    stroke-width: 12;
+    stroke-linecap: round;
+    /* 
+    Circle circumference = 2 * π * r = 2 * π * 70 ≈ 439.82
+    65% progress = 65% of circumference filled
+    stroke-dasharray: filled portion, empty portion
+    stroke-dashoffset: 0 (starting from top due to rotation)
+    */
+    stroke-dasharray: 285.88 153.94; /* 65% of 439.82 = 285.88 */
+    transition: stroke-dasharray var(--transition-base);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.progress-value {
+    font-size: var(--font-size-progress);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.progress-heading {
+    font-size: var(--font-size-heading);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+/* ============================================
+   CHECKLIST
+   ============================================ */
+.checklist {
+    list-style: none;
+    width: 100%;
+    background-color: var(--color-checklist-bg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.checklist-item {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    padding: var(--spacing-xs) 0;
+}
+
+.checklist-item.completed .checklist-text {
+    text-decoration: line-through;
+    color: var(--color-text-disabled);
+}
+
+.checklist-item.active .checklist-text {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-md);
+    }
+    
+    .form-wrapper {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-lg);
+        gap: var(--spacing-xl);
+    }
+    
+    .progress-section {
+        padding: 0;
+    }
+    
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-ring {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-ring-bg,
+    .progress-ring-fill {
+        cx: 75;
+        cy: 75;
+        r: 60;
+    }
+    
+    .progress-ring-fill {
+        /* Circumference = 2 * π * 60 ≈ 376.99 */
+        stroke-dasharray: 245.04 131.95; /* 65% of 376.99 */
+    }
+    
+    .progress-value {
+        font-size: 28px;
+    }
+}
+
+/* ============================================
+   FOCUS VISIBILITY
+   ============================================ */
+:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    body {
+        background-color: white;
+    }
+    
+    .form-wrapper {
+        border: 1px solid black;
+        box-shadow: none;
+    }
+    
+    .toggle-password,
+    .submit-button {
+        display: none;
+    }
+}
